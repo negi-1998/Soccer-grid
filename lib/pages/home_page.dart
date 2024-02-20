@@ -37,15 +37,6 @@ class _HomePageState extends State<HomePage> {
     player2Name = player2Controller.text;
   }
 
-//   Future<void> _playAudio() async {
-//   audioPlayer = AudioPlayer();
-//   try {
-//     await audioPlayer.play(AssetSource(bgMusicUrl));
-//   } catch (e) {
-//     print("Error playing audio: $e");
-//   }
-// }
-
 Future<void> _playAudio() async {
   try {
     audioPlayer = AudioPlayer();

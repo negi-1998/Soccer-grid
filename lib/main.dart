@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:soccer_grid/componenets/game_grid.dart';
 import 'package:soccer_grid/pages/game_page.dart';
 import 'package:soccer_grid/pages/home_page.dart';
 
@@ -13,7 +14,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return  MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: const GamePage(player1Name: 'jaja', player2Name: 'khakha',),
+      home: const GamePage(player1Name: 'haha',player2Name: 'dgda',),
+      // home: const HomePage(),
       title: "Soccer Grid",
       theme: ThemeData(
         useMaterial3: true,
