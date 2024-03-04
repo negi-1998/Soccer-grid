@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:soccer_grid/componenets/game_grid.dart';
 import 'package:flutter/services.dart';
+import 'package:soccer_grid/componenets/game_grid.dart';
 import 'package:soccer_grid/componenets/option_card.dart';
+import 'package:soccer_grid/componenets/player_score.dart';
 
 class GamePage extends StatefulWidget {
   final String player1Name;
   final String player2Name;
+
   const GamePage({Key? key, required this.player1Name, required this.player2Name}) : super(key: key);
 
   @override
@@ -15,58 +17,42 @@ class GamePage extends StatefulWidget {
 class _GamePageState extends State<GamePage> {
   int player1Score = 0;
   int player2Score = 0;
+  List<String> cardOptions = [];
+  String correctOption = '';
+   Key optionCardKey = UniqueKey();
+
   @override
   void initState() {
     super.initState();
     // Hide the status bar when the game page is initialized
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []); // Hide all system overlays
   }
+
   @override
   void dispose() {
     super.dispose();
     // Ensure the status bar is shown when the game page is disposed
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      // appBar: AppBar(
-      //   title: const Text("SOCCER GRID"),
-      //   centerTitle: true,
-      //   backgroundColor: Colors.amber,
-      // ),
       body: Column(
         children: [
-          SizedBox(
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Column(
-                    children: [
-                      Text(widget.player1Name),
-                      Text(player1Score.toString()),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8),
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.end,
-                    children: [
-                      Text(widget.player2Name),
-                      Text(player2Score.toString()),
-                    ],
-                  ),
-                ),
-              ],
+          PlayerScore(player1Name: widget.player1Name, player2Name: widget.player2Name),
+          Expanded(
+            child: GameGrid(
+              onOptionsChanged: (List<String> options) {
+                setState(() {
+                  cardOptions = List.from(options);
+                  correctOption = cardOptions[0];
+                  cardOptions.shuffle();
+                  optionCardKey = UniqueKey();
+                });
+              },
             ),
           ),
-          const Expanded(
-            child: GameGrid(),
-          ),
-
           Container(
             height: 300,
             width: double.infinity,
@@ -75,29 +61,33 @@ class _GamePageState extends State<GamePage> {
               direction: Axis.vertical,
               spacing: 20,
               children: [
-                Container(
-                  margin: const EdgeInsets.only(left: 5, right: 5),
-                  child: const Row(
-                    
-                    children: [
-                      OptionCard(option: 'lalala',),
-                      OptionCard(option: 'lalafg',)
-                    ],
+                if (cardOptions.isNotEmpty)
+                  Builder(
+                    builder: (context) {
+                      return Row(
+                        children: [
+                          OptionCard(option: cardOptions.elementAt(0), correctOption: correctOption),
+                          OptionCard(option: cardOptions.length > 1 ? cardOptions.elementAt(1) : '', correctOption: correctOption),
+                        ],
+                      );
+                    }
+    
                   ),
-                ),
-                Container(
-                  margin: const EdgeInsets.only(left: 5, right: 5),
-                  child: const Row(
-                    children: [
-                      OptionCard(option: 'lalala',),
-                      OptionCard(option: 'lalafg',)
-                    ],
+                if (cardOptions.length > 2)
+                  Builder(
+                    builder: (context) {
+                      return Row(
+                      children: [
+                        OptionCard(option: cardOptions.elementAt(2), correctOption: correctOption),
+                        OptionCard(option: cardOptions.length > 3 ? cardOptions.elementAt(3) : '', correctOption: correctOption),
+                      ],
+                    );
+                    }
+        
                   ),
-                )
               ],
             ),
           ),
-          
           const SizedBox(
             height: 25,
             width: 25,

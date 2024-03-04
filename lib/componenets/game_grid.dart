@@ -1,9 +1,12 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
-import 'package:soccer_grid/vars/team_index.dart'; // Import team_index.dart file
+import 'package:soccer_grid/componenets/cell_dialog.dart';
+import 'package:soccer_grid/vars/team_index.dart'; 
+import 'package:soccer_grid/vars/players.dart'; 
 
 class GameGrid extends StatefulWidget {
-  const GameGrid({Key? key}) : super(key: key);
+  final Function(List<String>) onOptionsChanged;
+  const GameGrid({Key? key, required this.onOptionsChanged}) : super(key: key);
 
   @override
   State<GameGrid> createState() => _GameGridState();
@@ -11,8 +14,12 @@ class GameGrid extends StatefulWidget {
 
 class _GameGridState extends State<GameGrid> {
   final _random = Random();
-  final _selectedLogos = List.generate(25, (_) => '');
-
+  final _selectedLogos = List.generate(25, (_) => ''); 
+  int currentPlayer = 1; // Variable to track the current player
+  List<String> rowVals=[];
+  List<String> colVals=[];
+  List<String> options=[];
+  List<int> visitedCells = [0,1,2,3,4,5,10,15,20];
   @override
   void initState() {
     super.initState();
@@ -20,25 +27,71 @@ class _GameGridState extends State<GameGrid> {
   }
 
   void _fillGridWithLogos() {
-    List<String> rowVals = rowHints.keys.toList();
-    List<String> colVals = columnHints.keys.toList();
+    rowVals = rowHints.keys.toList();
+    colVals = columnHints.keys.toList();
     for (int i = 1; i <= 4; i++) {
       int ind = _random.nextInt(rowVals.length);
       _selectedLogos[i] = rowHints[rowVals[ind]]!;
       rowVals.removeAt(ind);
     }
-
     for (int i = 5; i < 21; i += 5) {
       int ind = _random.nextInt(colVals.length);
       _selectedLogos[i] = columnHints[colVals[ind]]!;
-      colVals.removeAt(ind);
+      colVals.removeAt(ind); 
     }
   }
+
+  void _fillOptionsList(int index) {
+    options=[];
+    int row = index ~/ 5;
+    int col = index % 5;
+    String rowTeampath = _selectedLogos[row * 5];
+    String colTeampath = _selectedLogos[col];
+    String rowTeam = (rowTeampath.split('/').last).split('.').first;
+    String colTeam = (colTeampath.split('/').last).split('.').first;
+    Map<String, Map<String, List>> mapMappings ={
+      'barcelona' : barcelona,
+      'dortmund' : dortmund,
+      'pep' : pep,
+      'porto' : porto,
+      'liverpool' : liverpool,
+      'rNazario' : rNazario,
+      'psg' : psg,
+      'acMilan' : acMilan,
+      'newcastle' : newcastle,
+      'mls' : mls,
+      'napoli' : napoli,
+      'worldCup' : worldCup,
+    };
+    Map<String, List>? selectedMap = mapMappings[colTeam]; 
+    List<String> keys = selectedMap?.keys.toList() ?? [];
+    Random random = Random();
+    int randomIndex = random.nextInt(selectedMap![rowTeam]!.length);
+    options.insert(0, selectedMap[rowTeam]?[randomIndex]);
+    while(options.length < 4 ){
+      String selectedKey = keys[random.nextInt(keys.length)];
+      if(selectedKey != rowTeam){
+        List<String>? values = selectedMap[selectedKey]?.cast<String>();
+        if(values != null && values.isNotEmpty){
+          randomIndex = random.nextInt(values.length);
+          String selectedValue = values[randomIndex];
+          if (!options.contains(selectedValue)) {
+            options.add(selectedValue);
+          }
+        }
+      }
+      if (options.length >= 4) {
+        break;
+      }
+    }
+    widget.onOptionsChanged(options);
+  }
+
 
   @override
   Widget build(BuildContext context) {
     return GridView.builder(
-      padding: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(5.0),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 5,
         childAspectRatio: 1.0,
@@ -46,19 +99,52 @@ class _GameGridState extends State<GameGrid> {
       itemCount: 25,
       itemBuilder: (context, index) {
         final logoImage = _selectedLogos[index];
-        
-        return Container(
-          height: 50,
-          width: 50,
-          decoration: BoxDecoration(
-            border: Border.all(color: Colors.grey),
-            borderRadius: BorderRadius.circular(5.0),
-            image: logoImage.isNotEmpty
-                ? DecorationImage(
-                    image: AssetImage(logoImage),
-                    fit: BoxFit.contain,
-                  )
-                : null,
+
+        return GestureDetector(
+          onTap: () {
+          },
+          child: Stack(
+            children: [
+              Container(
+                height: 70,
+                width: 70,
+                decoration: BoxDecoration(
+                  border: Border.all(color: Colors.grey),
+                  borderRadius: BorderRadius.circular(5.0),
+                  boxShadow: [
+                    BoxShadow(
+                      color: currentPlayer == 1 ? Colors.orange.withOpacity(0.5) : Colors.blue.withOpacity(0.5),
+                      blurRadius: 10,
+                      spreadRadius: 5,
+                    ),
+                  ],
+                  image: logoImage.isNotEmpty
+                      ? DecorationImage(
+                          image: AssetImage(logoImage),
+                          fit: BoxFit.contain,
+                        )
+                      : null,
+                ),
+              ),
+              GestureDetector(
+                onTap: () {
+                  setState(() {
+                    currentPlayer = currentPlayer == 1 ? 2 : 1;
+                  });
+                  if(visitedCells.contains(index)) {
+                    showDialog(
+                      context: context, 
+                      builder: (context) => const CellDialog()
+                    );
+                  }
+                  else{
+                    visitedCells.insert(visitedCells.length, index);
+                    _fillOptionsList(index);
+                  }
+                  
+                },
+              ),
+            ],
           ),
         );
       },

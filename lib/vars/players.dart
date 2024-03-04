@@ -116,7 +116,7 @@ Map<String, List> liverpool={
 
   'interMilan': ['Paul Ince', 'Robbie Keane', 'Mario Balotelli', 'Philippe Coutinho', 'Xherdan Shaqiri'],
 
-  'mancesterCity': ['Daniel Sturridge', 'James Milner', 'Mario Balotelli', 'David James', 'Raheem Sterling', 'Robbie Fowler', 'Steve McManaman', 'Kolo Toure'],
+  'manchesterCity': ['Daniel Sturridge', 'James Milner', 'Mario Balotelli', 'David James', 'Raheem Sterling', 'Robbie Fowler', 'Steve McManaman', 'Kolo Toure'],
 
   'manchesterUnited': ['Fred Hopkin', 'Tommy Reid', 'Tom Miller', 'Tom Chorlton', 'Thomas McNulty', 'Paul Ince', 'Michael Owen', ],
 
@@ -214,11 +214,13 @@ Map<String, List> acMilan= {
 
   'chelsea': ['Alex', 'Marco Amelia', 'Tiemoué Bakayoko', 'Asmir Begović', 'Winston Bogarde', 'Fabio Borini', 'Carlo Cudicini', 'Marco van Ginkel'],
 
-  'atleticoMadrid': ['Christian Abbiati', 'Demetrio Albertini', 'Alessio Cerci', 'José Chamot', 'Fabricio Coloccini', 'Cosmin Contra', 'Pablo García', 'Theo Hernández'],
+  'athleticoMadrid': ['Christian Abbiati', 'Demetrio Albertini', 'Alessio Cerci', 'José Chamot', 'Fabricio Coloccini', 'Cosmin Contra', 'Pablo García', 'Theo Hernández'],
 
   'carlo' : ['Andrea Pirlo', 'Gennaro Gattuso', 'Clarence Seedorf', 'Dida', 'Kaká', 'Paolo Maldini', 'Alessandro Nesta', 'Kakhaber Kaladze'],
 
-  'goalkeeper': ['Mike Maignan', 'Marco Sportiello', 'Ciprian Tătărușanu', 'Christian Abbiati', 'Marco Amelia', 'Zeljko Kalac']
+  'goalkeeper': ['Mike Maignan', 'Marco Sportiello', 'Ciprian Tătărușanu', 'Christian Abbiati', 'Marco Amelia', 'Zeljko Kalac'],
+
+  'juventus' : ['Manuel Locatelli', 'Mario Mandžukić', 'Nicola Legrottaglie', 'Filippo Inzaghi', 'Gonzalo Higuaín', 'Mattia De Sciglio', 'Leonardo Bonucci']
 };
 
 Map<String, List> newcastle={
@@ -244,7 +246,9 @@ Map<String, List> newcastle={
 
   'carlo' : ['joselu'],
 
-  'goalkeeper' : ['Pavel Srnicek', 'Shaka Hislop', 'Shay Given', 'Steve Harper', 'Rob Elliot', 'Karl Darlow']
+  'goalkeeper' : ['Pavel Srnicek', 'Shaka Hislop', 'Shay Given', 'Steve Harper', 'Rob Elliot', 'Karl Darlow'],
+
+  'juventus' : ['Jean-Alain Boumsong', ]
 };
 
 Map<String, List> mls= {
@@ -270,7 +274,9 @@ Map<String, List> mls= {
 
   'carlo' : ['Kaka', 'Andrea Pirlo', 'David Beckham', 'Alessandro Nesta', 'Fabio Cannavaro', 'Clarence Seedorf'],
 
-  'goalkeeper' : ['Nick Rimando', 'Kevin Hartman', 'Joe Cannon', 'Jon Busch', 'Tony Meola', 'Matt Reis', 'Troy Perkins']
+  'goalkeeper' : ['Nick Rimando', 'Kevin Hartman', 'Joe Cannon', 'Jon Busch', 'Tony Meola', 'Matt Reis', 'Troy Perkins'],
+
+  'juventus' : ['Giovinco', 'Giorgio Chiellini', 'Martin Caceres', 'Federico Bernardeschi', 'Higuain', 'Douglas Costa']
 };
 
 Map<String, List> napoli= {
@@ -296,7 +302,9 @@ Map<String, List> napoli= {
 
   'carlo' : ['James Rodríguez', 'Allan', 'David Ospina', 'Pepe Reina',],
  
-  'goalkeeper' : ['Alex Meret', 'David Ospina', 'Pepe Reina',]
+  'goalkeeper' : ['Alex Meret', 'David Ospina', 'Pepe Reina',],
+
+  'juventus' : ['Nicola Zanini', 'Marcelo Zalayeta', 'Sabrina Tasselli', 'Fabio Quagliarella', 'Gonzalo Higuaín', 'Arkadiusz Milik', 'Fabio Cannavaro']
 };
 
 Map<String, List> worldCup={
@@ -322,5 +330,7 @@ Map<String, List> worldCup={
 
   'carlo' : ['Sami Khedira', 'Kaká', 'Andrea Pirlo', 'Toni Kross', 'Raphael Varane', 'Thomas Muller', 'Manuel Neuer'],
 
-  'goalkeeper' : ['Iker Casillas', 'Dino Zoff', 'Sepp Maier', 'Gianluigi Buffon', 'Aldo Olivieri', 'Bodo Illgner']
+  'goalkeeper' : ['Iker Casillas', 'Dino Zoff', 'Sepp Maier', 'Gianluigi Buffon', 'Aldo Olivieri', 'Bodo Illgner'],
+
+  'juventus' : ['Alessandro Del Piero', 'Fabio Cannavaro', 'Gianluigi Buffon', 'Zinedine Zidane', 'Didier Deschamps', 'Paolo Rossi', 'Angel Di Maria', 'Leandro Paredes']
 };
