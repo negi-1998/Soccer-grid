@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+// import 'package:soccer_grid/componenets/cell_dialog.dart';
 import 'package:soccer_grid/componenets/game_grid.dart';
+// import 'package:soccer_grid/componenets/no_answer_dialog.dart';
 import 'package:soccer_grid/componenets/option_card.dart';
 import 'package:soccer_grid/componenets/player_score.dart';
 
@@ -40,7 +42,11 @@ class _GamePageState extends State<GamePage> {
     return Scaffold(
       body: Column(
         children: [
-          PlayerScore(player1Name: widget.player1Name, player2Name: widget.player2Name),
+          Builder(
+            builder: (context){
+              return PlayerScore(player1Name: widget.player1Name, player2Name: widget.player2Name);
+            }
+          ),
           Expanded(
             child: GameGrid(
               onOptionsChanged: (List<String> options) {
@@ -85,13 +91,11 @@ class _GamePageState extends State<GamePage> {
                     }
         
                   ),
+
+                // const RuleDialog(),
               ],
             ),
           ),
-          const SizedBox(
-            height: 25,
-            width: 25,
-          )
         ],
       ),
     );

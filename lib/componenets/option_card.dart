@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:soccer_grid/componenets/game_grid.dart';
+// import 'package:soccer_grid/componenets/game_grid.dart';
 
 class OptionCard extends StatefulWidget {
   final String option;
@@ -22,10 +22,10 @@ class _OptionCardState extends State<OptionCard> {
   late String _option;
   // ignore: unused_field
   late String _correctOption;
-
+  late bool playerAnswer = true;
   @override
   void initState() {
-    super.initState();
+    super.initState();              
     _option = widget.option;
     _correctOption = widget.correctOption;
   }
@@ -50,6 +50,7 @@ class _OptionCardState extends State<OptionCard> {
         setState(() {
           // Update the card color based on whether the selected option is correct or not
           cardColor = widget.option == widget.correctOption ? Colors.green : Colors.red;
+          playerAnswer = widget.option == widget.correctOption ? true : false; // pass this playerAnswer to the player_score using a callback function
         });
       },
       child: AnimatedContainer(

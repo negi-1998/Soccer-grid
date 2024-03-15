@@ -160,7 +160,7 @@ Map<String, List> rNazario ={
 
   'juventus' : ['Ricardo Kaká', 'Emerson Leão', 'Andrea Pirlo', 'Filippo Inzaghi', 'Alessandro Nesta', 'Cafu'],
 
-  'atleticoMadrid' : ['Elson', 'Juninho Paulista', 'Givaldo', 'Santiago Solari', 'Emerson', 'Esteban Cambiasso'],
+  'athleticoMadrid' : ['Elson', 'Juninho Paulista', 'Givaldo', 'Santiago Solari', 'Emerson', 'Esteban Cambiasso'],
 
   'carlo' : ['Roberto Carlos', 'Emerson', 'Ricardo Carvalho', 'Ricardo Kaká', 'Edwin van der Sar'],
 
@@ -188,7 +188,7 @@ Map<String, List> psg = {
 
   'juventus' : ['Nicolas Anelka', 'Nicklas Bendtner', 'Thierry Henry', 'Lina Hurtig', 'Stephan Lichtsteiner', 'Alex Manninger', 'Patrick Vieira'],
 
-  'atleticoMadrid' : ['José Antonio Reyes', 'Fran Mérida', 'Thomas Partey', 'Gabriel Paulista', 'Pauline Peyraud-Magnin', 'Lucas Torreira', 'Sari van Veenendaal'],
+  'athleticoMadrid' : ['José Antonio Reyes', 'Fran Mérida', 'Thomas Partey', 'Gabriel Paulista', 'Pauline Peyraud-Magnin', 'Lucas Torreira', 'Sari van Veenendaal'],
 
   'carlo' : ['Marco van Basten', 'Clarence Seedorf'],
 
@@ -326,7 +326,7 @@ Map<String, List> worldCup={
 
   'brazil' : ['Garrincha', 'Didi', 'Vavá', 'Zito', 'Jairzinho', 'Rivelino', 'Romário', 'Mauro Silva', 'Cafu', 'Edmílson'],
 
-  'atleticoMadrid' : ['Antoine Griezmann', 'Lucas Hernández', 'Gabi', 'Juanfran', 'Bernd Schuster'],
+  'athleticoMadrid' : ['Antoine Griezmann', 'Lucas Hernández', 'Gabi', 'Juanfran', 'Bernd Schuster'],
 
   'carlo' : ['Sami Khedira', 'Kaká', 'Andrea Pirlo', 'Toni Kross', 'Raphael Varane', 'Thomas Muller', 'Manuel Neuer'],
 

@@ -1,6 +1,8 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+// import 'package:fluttertoast/fluttertoast.dart';
 import 'package:soccer_grid/componenets/cell_dialog.dart';
+import 'package:soccer_grid/vars/globals.dart';
 import 'package:soccer_grid/vars/team_index.dart'; 
 import 'package:soccer_grid/vars/players.dart'; 
 
@@ -128,16 +130,32 @@ class _GameGridState extends State<GameGrid> {
               ),
               GestureDetector(
                 onTap: () {
-                  setState(() {
-                    currentPlayer = currentPlayer == 1 ? 2 : 1;
-                  });
+                  if(playerturn==0) {
+                    clicked = true;
+                  }
                   if(visitedCells.contains(index)) {
                     showDialog(
                       context: context, 
                       builder: (context) => const CellDialog()
                     );
                   }
+                  
                   else{
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text(
+                          playerturn%2==0? 'Player 1 turn' : 'Player 2 turn',
+                          style: const TextStyle(color: Colors.white),
+                        ), 
+                        duration: const Duration(seconds: 2), 
+                        backgroundColor: Colors.green,
+                      )
+                    );
+                    playerturn++;
+                    setState(() {
+                      currentPlayer = currentPlayer == 1 ? 2 : 1;
+
+                    });
                     visitedCells.insert(visitedCells.length, index);
                     _fillOptionsList(index);
                   }
