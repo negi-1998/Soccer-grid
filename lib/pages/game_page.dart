@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-// import 'package:soccer_grid/componenets/cell_dialog.dart';
 import 'package:soccer_grid/componenets/game_grid.dart';
-// import 'package:soccer_grid/componenets/no_answer_dialog.dart';
 import 'package:soccer_grid/componenets/option_card.dart';
 import 'package:soccer_grid/componenets/player_score.dart';
 
 class GamePage extends StatefulWidget {
-  final String player1Name;
-  final String player2Name;
-
-  const GamePage({Key? key, required this.player1Name, required this.player2Name}) : super(key: key);
+  const GamePage({super.key});
 
   @override
   State<GamePage> createState() => _GamePageState();
@@ -44,7 +39,7 @@ class _GamePageState extends State<GamePage> {
         children: [
           Builder(
             builder: (context){
-              return PlayerScore(player1Name: widget.player1Name, player2Name: widget.player2Name);
+              return const PlayerScore();
             }
           ),
           Expanded(

@@ -7,3 +7,6 @@ int playerturn=0;
 
 bool clicked = false;
 // this variable is set to true when the grid is clicked for the forst time and remains true through then. Used to break the condition for the first click
+
+bool player1correct=false;
+bool player2correct = false;

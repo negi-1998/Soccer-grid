@@ -1,0 +1,22 @@
+import nltk
+from nltk.tokenize import word_tokenize
+from nltk import pos_tag, RegexpParser
+nltk.download('punkt')
+nltk.download('averaged_perceptron_tagger')
+def tokenize_and_chunk_input():
+    user_input = "A quick brown fox jumps over a lazy dog."
+    tokens = word_tokenize(user_input)
+    tagged_tokens = pos_tag(tokens)
+    grammar = r"""
+        NP: {<DT|JJ|NN.*>+}          
+        PP: {<IN><NP>}                
+        VP: {<VB.*><NP|PP|CLAUSE>+$} 
+        CLAUSE: {<NP><VP>}            
+    """
+    chunk_parser = RegexpParser(grammar)
+    chunks = chunk_parser.parse(tagged_tokens)
+    return chunks
+if __name__ == "__main__":
+    print("Tokenizing and chunking input from the user using NLTK...")
+    chunked_input = tokenize_and_chunk_input()
+    print("Chunked input:", chunked_input)

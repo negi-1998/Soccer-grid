@@ -1,8 +1,10 @@
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:soccer_grid/componenets/error_dialog.dart';
 import 'package:soccer_grid/componenets/team_grid.dart';
 import 'package:soccer_grid/pages/game_page.dart';
+import 'package:soccer_grid/providers/player_name_provider.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});
@@ -35,6 +37,8 @@ class _HomePageState extends State<HomePage> {
   void setPlayersNames(){
     player1Name = player1Controller.text;
     player2Name = player2Controller.text;
+    context.read<NameProvider>().updatePlayer1Name(newPlayer1Name: player1Controller.text);
+    context.read<NameProvider>().updatePlayer2Name(newPlayer2Name: player2Controller.text);
   }
 
 Future<void> _playAudio() async {
@@ -145,11 +149,12 @@ void dispose() {
                   );
                  return;
                 }
+                
                 dispose();
                 Navigator.push(
                   context,
                   MaterialPageRoute(
-                    builder: (context)=>GamePage( player1Name: player1Name, player2Name: player2Name)
+                    builder: (context)=>const GamePage()
                   )
                 );
               },

@@ -1,10 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:soccer_grid/componenets/game_grid.dart';
+import 'package:provider/provider.dart';
 import 'package:soccer_grid/pages/game_page.dart';
 import 'package:soccer_grid/pages/home_page.dart';
+import 'package:soccer_grid/providers/player_name_provider.dart';
+import 'package:soccer_grid/providers/points_provider.dart';
 
 void main() {
-  runApp(const MyApp());
+  runApp(
+    const MyApp(),
+    );
+  
 }
 
 class MyApp extends StatelessWidget {
@@ -12,26 +17,31 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return  MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: const GamePage(player1Name: 'haha',player2Name: 'dgda',),
-      // home: const HomePage(),
-      title: "Soccer Grid",
-      theme: ThemeData(
-        useMaterial3: true,
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.black,
-          primary: Colors.blue
-        ),
-
-        textTheme: const TextTheme(
-          titleLarge: TextStyle(
-            fontWeight: FontWeight.bold,
-            fontSize: 20
+    return  MultiProvider(
+      providers: [ChangeNotifierProvider(create: (context)=>PointsProvider()),
+        ChangeNotifierProvider(create: (context)=>NameProvider()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        home: const HomePage(),
+        // home: const HomePage(),
+        title: "Soccer Grid",
+        theme: ThemeData(
+          useMaterial3: true,
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: Colors.black,
+            primary: Colors.blue
           ),
-
-          
-        )
+      
+          textTheme: const TextTheme(
+            titleLarge: TextStyle(
+              fontWeight: FontWeight.bold,
+              fontSize: 20
+            ),
+      
+            
+          )
+        ),
       ),
     );
   }
