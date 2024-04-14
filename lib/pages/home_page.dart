@@ -46,7 +46,7 @@ Future<void> _playAudio() async {
     audioPlayer = AudioPlayer();
     await audioPlayer.play(AssetSource(bgMusicUrl));
   } catch (e) {
-    print("Error playing audio: $e");
+    //
   } finally {
     // Release the player even if an error occurs
   }
@@ -54,7 +54,7 @@ Future<void> _playAudio() async {
 
 @override
 void initState() {
-  print('audio started!!!!!!!!!!!!!');
+ // print('audio started!!!!!!!!!!!!!');
   super.initState();
   _playAudio(); // Call the asynchronous method
 }
@@ -62,7 +62,7 @@ void initState() {
 
 @override
 void dispose() {
-  print("audio disposed!!!!!!!!!!!!!!!!!");
+ // print("audio disposed!!!!!!!!!!!!!!!!!");
   audioPlayer.dispose();
   super.dispose();
 }

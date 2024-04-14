@@ -1,7 +1,10 @@
 import 'dart:math';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 // import 'package:fluttertoast/fluttertoast.dart';
 import 'package:soccer_grid/componenets/cell_dialog.dart';
+import 'package:soccer_grid/providers/home_page_refresh.dart';
+import 'package:soccer_grid/providers/points_provider.dart';
 import 'package:soccer_grid/vars/globals.dart';
 import 'package:soccer_grid/vars/team_index.dart'; 
 import 'package:soccer_grid/vars/players.dart'; 
@@ -92,6 +95,14 @@ class _GameGridState extends State<GameGrid> {
 
   @override
   Widget build(BuildContext context) {
+    final model = Provider.of<HomePageModel>(context);
+    if (model.rebuildHomepage) {
+      setState(() {
+      });
+      model.resetTrigger();
+      context.read<PointsProvider>().player1Score=0;
+      context.read<PointsProvider>().player2Score=0;
+    }
     return GridView.builder(
       padding: const EdgeInsets.all(5.0),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(

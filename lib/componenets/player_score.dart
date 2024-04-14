@@ -16,7 +16,7 @@ class _PlayerScoreState extends State<PlayerScore> {
   late int player1prev=0;
   late int player2prev=0;
 
-  // @override
+  // @override                                                            
   // void initState() {  // setting the initial scores of the players from the initialScore variable which has been set to 0
   //   super.initState();
   //   player1Score = widget.initialScore;    
@@ -35,30 +35,15 @@ class _PlayerScoreState extends State<PlayerScore> {
             padding: const EdgeInsets.all(8),
             child: Column(
               children: [
-                Text(context.watch<NameProvider>().player1Name),
+                Text(context.watch<NameProvider>().player1Name,
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
                 Stack(
                   alignment: Alignment.center,
                   children: [
-                    Text(context.watch<PointsProvider>().player1Score.toString()),
-                      // AnimatedOpacity(
-                      //   duration: const Duration(milliseconds: 500),
-                      //   opacity: 0,
-                      //   onEnd: () {
-                      //     setState(() {
-                      //       updateScores();
-                      //       player1Score = player1NewScore;
-                      //       player1NewScore =player1Score ;
-                      //     });
-                      //   },
-                      //   child: Text(
-                      //     player1NewScore > player1Score ? '+3' : '-1',
-                      //     style: TextStyle(
-                      //       color: player1NewScore > player1Score ? Colors.green : Colors.red,
-                      //       fontSize: 20,
-                      //       fontWeight: FontWeight.bold,
-                      //     ),
-                      //   ),
-                      // ),
+                    Text(context.watch<PointsProvider>().player1Score.toString(),
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
 
                   ],
                 ),
@@ -70,11 +55,15 @@ class _PlayerScoreState extends State<PlayerScore> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
-                Text(context.watch<NameProvider>().player2Name),
+                Text(context.watch<NameProvider>().player2Name,
+                  style: Theme.of(context).textTheme.titleMedium,
+                ),
                 Stack(
                   alignment: Alignment.center,
                   children: [
-                    Text(context.watch<PointsProvider>().player2Score.toString()),
+                    Text(context.watch<PointsProvider>().player2Score.toString(),
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
                   ],
                 ),
               ],

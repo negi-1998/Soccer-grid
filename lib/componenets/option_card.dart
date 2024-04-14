@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:soccer_grid/componenets/already_answered.dart';
+import 'package:soccer_grid/componenets/draw_dialog.dart';
+import 'package:soccer_grid/componenets/winner_dialog.dart';
+import 'package:soccer_grid/providers/player_name_provider.dart';
 import 'package:soccer_grid/vars/globals.dart';
 import 'package:soccer_grid/providers/points_provider.dart';
+
 // import 'package:soccer_grid/componenets/game_grid.dart';
 
 class OptionCard extends StatefulWidget {
@@ -89,6 +93,24 @@ class _OptionCardState extends State<OptionCard> {
             }
             });
             playerturn++;
+            if(playerturn>=16) {
+                playerturn=0;
+              if(context.watch<PointsProvider>().player1Score != context.watch<PointsProvider>().player2Score) {
+                showDialog(
+                context: context, 
+                builder: (context)=>WinnerDialog(
+                  winnerName: context.watch<PointsProvider>().player1Score > context.watch<PointsProvider>().player2Score ? context.watch<NameProvider>().player1Name : context.watch<NameProvider>().player2Name));
+              }
+            
+              else{
+                playerturn=0;
+                showDialog(
+                  context: context, 
+                  builder: (context)=>const DrawDialog()
+                 );
+              }
+            }
+            
           }
           
 

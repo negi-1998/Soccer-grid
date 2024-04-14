@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:provider/provider.dart';
 import 'package:soccer_grid/componenets/game_grid.dart';
 import 'package:soccer_grid/componenets/option_card.dart';
 import 'package:soccer_grid/componenets/player_score.dart';
+import 'package:soccer_grid/providers/home_page_refresh.dart';
+import 'package:soccer_grid/providers/points_provider.dart';
 
 class GamePage extends StatefulWidget {
   const GamePage({super.key});
@@ -34,6 +37,14 @@ class _GamePageState extends State<GamePage> {
 
   @override
   Widget build(BuildContext context) {
+    final model = Provider.of<HomePageModel>(context);
+    if (model.rebuildHomepage) {
+      setState(() {
+      });
+      model.resetTrigger();
+      context.read<PointsProvider>().player1Score=0;
+      context.read<PointsProvider>().player2Score=0;
+    }
     return Scaffold(
       body: Column(
         children: [
@@ -55,21 +66,23 @@ class _GamePageState extends State<GamePage> {
             ),
           ),
           Container(
-            height: 300,
+            height: 200,
             width: double.infinity,
             color: Colors.grey,
-            child: Wrap(
-              direction: Axis.vertical,
-              spacing: 20,
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 if (cardOptions.isNotEmpty)
                   Builder(
                     builder: (context) {
                       return Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           OptionCard(option: cardOptions.elementAt(0), correctOption: correctOption),
+                          const Spacer(flex: 2,),
                           OptionCard(option: cardOptions.length > 1 ? cardOptions.elementAt(1) : '', correctOption: correctOption),
                         ],
+                        
                       );
                     }
     
@@ -78,10 +91,12 @@ class _GamePageState extends State<GamePage> {
                   Builder(
                     builder: (context) {
                       return Row(
-                      children: [
-                        OptionCard(option: cardOptions.elementAt(2), correctOption: correctOption),
-                        OptionCard(option: cardOptions.length > 3 ? cardOptions.elementAt(3) : '', correctOption: correctOption),
-                      ],
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: [
+                          OptionCard(option: cardOptions.elementAt(2), correctOption: correctOption),
+                          const Spacer(flex: 1,),
+                          OptionCard(option: cardOptions.length > 3 ? cardOptions.elementAt(3) : '', correctOption: correctOption),
+                        ],
                     );
                     }
         
