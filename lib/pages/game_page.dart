@@ -124,12 +124,15 @@
 // }
 
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:soccer_grid/componenets/game_grid.dart';
 import 'package:soccer_grid/componenets/option_card.dart';
 import 'package:soccer_grid/componenets/player_score.dart';
+import 'package:soccer_grid/componenets/rules_page.dart';
 import 'package:soccer_grid/providers/home_page_refresh.dart';
 import 'package:soccer_grid/providers/points_provider.dart';
 
@@ -179,6 +182,24 @@ class _GamePageState extends State<GamePage> with SingleTickerProviderStateMixin
     return Scaffold(
       body: Column(
         children: [
+          GestureDetector(
+            onTap: (){
+              showDialog(
+                context: context, 
+                builder: (BuildContext context){
+                  return const RulesPage();
+                }
+              );
+            },
+            child: Container(
+              margin: const EdgeInsets.fromLTRB(0, 5, 5, 15),
+              alignment: Alignment.topRight,
+              child: const Icon(
+                Icons.question_mark_sharp,
+                  
+              ),
+            ),
+          ),
           Builder(
             builder: (context) {
               return const PlayerScore();
@@ -197,7 +218,7 @@ class _GamePageState extends State<GamePage> with SingleTickerProviderStateMixin
               },
             ),
           ),
-          Container(
+          SizedBox(
             height: 300,
             width: double.infinity,
             // color: Colors.grey,

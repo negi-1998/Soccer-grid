@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: const GamePage(),
+        home: const HomePage(),
         // home: const HomePage(),
         title: "Soccer Grid",
         theme: ThemeData(
