@@ -123,11 +123,8 @@
 //   }
 // }
 
-
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:soccer_grid/componenets/game_grid.dart';
 import 'package:soccer_grid/componenets/option_card.dart';
@@ -150,7 +147,7 @@ class _GamePageState extends State<GamePage> with SingleTickerProviderStateMixin
   String correctOption = '';
   Key optionCardKey = UniqueKey();
   late AnimationController _animationController;
-   late Animation<double> _animationValue;
+  
   @override
    void initState() {
     super.initState();
@@ -158,7 +155,7 @@ class _GamePageState extends State<GamePage> with SingleTickerProviderStateMixin
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: []);
 
     _animationController = AnimationController(vsync: this, duration: const Duration(seconds: 1)); // Initialize animation controller
-    _animationValue = Tween<double>(begin: 0.0, end: 0.5).animate(_animationController); // Initialize animation value
+ 
   }
 
   @override
@@ -231,18 +228,8 @@ class _GamePageState extends State<GamePage> with SingleTickerProviderStateMixin
                       return Row(
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
-                          AnimatedPositioned(
-                            duration: const Duration(seconds: 1),
-                            curve: Curves.easeInOut,
-                            left: _animationValue.value * MediaQuery.of(context).size.width,
-                            top: 0,
-                            child: OptionCard(option: cardOptions.elementAt(0), correctOption: correctOption)),
-                          AnimatedPositioned(
-                            duration: const Duration(seconds: 1),
-                            curve: Curves.easeInOut,
-                            right: _animationValue.value * MediaQuery.of(context).size.width,
-                            top: 0,
-                            child: OptionCard(option: cardOptions.length > 1 ? cardOptions.elementAt(1) : '', correctOption: correctOption)),
+                          OptionCard(option: cardOptions.elementAt(0), correctOption: correctOption),
+                          OptionCard(option: cardOptions.length > 1 ? cardOptions.elementAt(1) : '', correctOption: correctOption),
                         ],
                       );
                     },
@@ -267,5 +254,5 @@ class _GamePageState extends State<GamePage> with SingleTickerProviderStateMixin
     );
   }
 
-  // Added getter for animation
+  
 }

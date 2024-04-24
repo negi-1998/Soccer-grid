@@ -162,11 +162,10 @@ class _GameGridState extends State<GameGrid> {
                         backgroundColor: Colors.green,
                       )
                     );
-                    //playerturn++;
+                    
                     setState(() {
                       currentPlayer = currentPlayer == 1 ? 2 : 1;
-                      player1Answered = false;
-                      player2Answered = false;
+                      playerAnswered = false;
                     });
                     visitedCells.insert(visitedCells.length, index);
                     _fillOptionsList(index);

@@ -1,5 +1,5 @@
-bool player1Answered = false;
-bool player2Answered = false;
+bool playerAnswered = false;
+
 //these two variables turn to true when the player does not skip the question and answer it, whether correctly or incorrectly
 
 int playerturn=0; 

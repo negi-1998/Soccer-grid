@@ -7,8 +7,6 @@ import 'package:soccer_grid/providers/player_name_provider.dart';
 import 'package:soccer_grid/vars/globals.dart';
 import 'package:soccer_grid/providers/points_provider.dart';
 
-// import 'package:soccer_grid/componenets/game_grid.dart';
-
 class OptionCard extends StatefulWidget {
   final String option;
   final String correctOption;
@@ -52,15 +50,22 @@ class _OptionCardState extends State<OptionCard> {
   }
   @override
   Widget build(BuildContext context) {
+    
     return GestureDetector(
       onTap: () {
 
           // Shows a dialog box if the player tries to answer same question twice.
-          if(playerturn%2==1 && player1Answered==true) {
-            const AlreadyAnswered();
+          if(playerturn%2==1 && playerAnswered==true) {
+            showDialog(
+                  context: context, 
+                  builder: (context)=>const AlreadyAnswered()
+                 );
           }
-          else if(playerturn%2==0 && player2Answered==true) {
-            const AlreadyAnswered();
+          else if(playerturn%2==0 && playerAnswered==true) {
+            showDialog(
+                  context: context, 
+                  builder: (context)=>const AlreadyAnswered()
+                 );
           }
           // Update the card color based on whether the selected option is correct or not
           else{
@@ -86,30 +91,36 @@ class _OptionCardState extends State<OptionCard> {
             }
             // rebuild the build function of PlayerScore.
             if(playerturn%2==0) {
-              player1Answered=true;
+              playerAnswered=true;
             }
             else{
-              player2Answered=true;
+              playerAnswered=true;
             }
             });
             playerturn++;
-            if(playerturn>=16) {
-                playerturn=0;
-              if(context.watch<PointsProvider>().player1Score != context.watch<PointsProvider>().player2Score) {
+            print("currently $playerturn");
+            if (playerturn >= 16) {
+              print('I am inside the >16 condition');
+              playerturn = 0;
+              
+              var pointsProvider = Provider.of<PointsProvider>(context, listen: false);
+              if (pointsProvider.player1Score != pointsProvider.player2Score) {
                 showDialog(
-                context: context, 
-                builder: (context)=>WinnerDialog(
-                  winnerName: context.watch<PointsProvider>().player1Score > context.watch<PointsProvider>().player2Score ? context.watch<NameProvider>().player1Name : context.watch<NameProvider>().player2Name));
-              }
-            
-              else{
-                playerturn=0;
+                  context: context,
+                  builder: (context) => WinnerDialog(
+                    winnerName: pointsProvider.player1Score > pointsProvider.player2Score
+                        ? Provider.of<NameProvider>(context, listen: false).player1Name
+                        : Provider.of<NameProvider>(context, listen: false).player2Name,
+                  ),
+                );
+              } else {
                 showDialog(
-                  context: context, 
-                  builder: (context)=>const DrawDialog()
-                 );
+                  context: context,
+                  builder: (context) => const DrawDialog(),
+                );
               }
             }
+
             
           }
           
