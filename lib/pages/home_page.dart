@@ -6,14 +6,14 @@ import 'package:soccer_grid/pages/game_page.dart';
 import 'package:soccer_grid/providers/player_name_provider.dart';
 import 'package:audioplayers/audioplayers.dart';
 
-class HomePage extends StatefulWidget {
+class HomePage extends StatefulWidget with WidgetsBindingObserver {
   const HomePage({Key? key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   late TextEditingController player1Controller;
   late TextEditingController player2Controller;
   late String player1Name;
@@ -29,13 +29,29 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     _initControllers();
     _initAudioPlayer();
+    WidgetsBinding.instance.addObserver(this);
+  }
+
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if(state== AppLifecycleState.inactive || state == AppLifecycleState.paused) {
+      audioPlayer.stop();
+    }
+    else if(state==AppLifecycleState.resumed) {
+      audioPlayer.resume();
+    }
   }
 
   @override
   void dispose() {
+    WidgetsBinding.instance.removeObserver(this);
     audioPlayer.dispose();
-    player1Controller.dispose();
-    player2Controller.dispose();
+    if (player1Controller.text.isNotEmpty) {
+      player1Controller.dispose();
+    }
+    if (player1Controller.text.isNotEmpty) {
+      player2Controller.dispose();
+    }
     super.dispose();
   }
 
@@ -119,7 +135,7 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                           ),
-                          const SizedBox(height: 20.0),
+                          const SizedBox(height: 40.0),
                           Container(
                             width: constraints.maxWidth * 0.6,
                             child: TextField(
@@ -136,10 +152,10 @@ class _HomePageState extends State<HomePage> {
                               ),
                             ),
                           ),
+                          const SizedBox(height: 20.0),
                           TeamGrid(
                             onTeamSelected: selectTeamForPlayer2,
                           ),
-                          
                           const SizedBox(height: 20.0),
                           Container(
                             width: constraints.maxWidth * 0.8,
@@ -156,13 +172,19 @@ class _HomePageState extends State<HomePage> {
                                   );
                                   return;
                                 }
-                                dispose();
                                 Navigator.push(
                                   context,
                                   MaterialPageRoute(
                                     builder: (context) => const GamePage(),
                                   ),
-                                );
+                                ).then((value) {
+                                  if (player1Controller.text.isNotEmpty) {
+                                    player1Controller.clear();
+                                  }
+                                  if (player1Controller.text.isNotEmpty) {
+                                    player2Controller.clear();
+                                  }
+                                });
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: Colors.white,

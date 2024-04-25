@@ -88,7 +88,7 @@ Map<String, List> porto = {
 
   'interMilan' : ['Ricardo Quaresma', 'Pelé', 'Sérgio Conceição', 'Rolando', ],
 
-  'mancesterCity': ['João Cancelo', 'Eliaquim Mangala', 'Fernando', 'Ricardo Quaresma'],
+  'manchesterCity': ['João Cancelo', 'Eliaquim Mangala', 'Fernando', 'Ricardo Quaresma'],
 
   'manchesterUnited' : ['Radamel Falcao', 'Anderson', 'Diogo Dalot'],
 
