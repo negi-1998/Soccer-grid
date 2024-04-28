@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:provider/provider.dart';
-import 'package:soccer_grid/pages/game_page.dart';
 import 'package:soccer_grid/pages/home_page.dart';
 import 'package:soccer_grid/providers/home_page_refresh.dart';
 import 'package:soccer_grid/providers/player_name_provider.dart';
 import 'package:soccer_grid/providers/points_provider.dart';
 
 void main() {
+  SystemChrome.setEnabledSystemUIMode(SystemUiMode.immersive, overlays: []);
   runApp(
     const MyApp(),
     );

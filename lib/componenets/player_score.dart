@@ -15,16 +15,6 @@ class _PlayerScoreState extends State<PlayerScore> {
   late int player2NewScore=0;
   late int player1prev=0;
   late int player2prev=0;
-
-  // @override                                                            
-  // void initState() {  // setting the initial scores of the players from the initialScore variable which has been set to 0
-  //   super.initState();
-  //   player1Score = widget.initialScore;    
-  //   player2Score = widget.initialScore;
-  // }
-
-  
-
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -36,13 +26,13 @@ class _PlayerScoreState extends State<PlayerScore> {
             child: Column(
               children: [
                 Text(context.watch<NameProvider>().player1Name,
-                  style: Theme.of(context).textTheme.titleMedium,
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.white),
                 ),
                 Stack(
                   alignment: Alignment.center,
                   children: [
                     Text(context.watch<PointsProvider>().player1Score.toString(),
-                      style: Theme.of(context).textTheme.titleMedium,
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.white),
                     ),
 
                   ],
@@ -56,13 +46,13 @@ class _PlayerScoreState extends State<PlayerScore> {
               crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Text(context.watch<NameProvider>().player2Name,
-                  style: Theme.of(context).textTheme.titleMedium,
+                  style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.white),
                 ),
                 Stack(
                   alignment: Alignment.center,
                   children: [
                     Text(context.watch<PointsProvider>().player2Score.toString(),
-                      style: Theme.of(context).textTheme.titleMedium,
+                      style: Theme.of(context).textTheme.titleMedium?.copyWith(color: Colors.white),
                     ),
                   ],
                 ),

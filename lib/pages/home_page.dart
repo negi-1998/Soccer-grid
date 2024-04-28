@@ -21,7 +21,7 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
   late String player1Team;
   late String player2Team;
   late AudioPlayer audioPlayer;
-  final String bgMusicUrl = 'audio/coverSong.mp3';
+  final String bgMusicUrl = 'assets/audio/coverSong.mp3';
   late double iconSize;
 
   @override
@@ -122,7 +122,9 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                           Container(
                             width: constraints.maxWidth * 0.6,
                             child: TextField(
+                              style: const TextStyle(color: Colors.white),
                               controller: player1Controller,
+                              maxLength: 12,
                               decoration: const InputDecoration(
                                 border: OutlineInputBorder(
                                   borderRadius: BorderRadius.horizontal(
@@ -132,6 +134,8 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                                 ),
                                 labelText: 'Player 1',
                                 hintText: 'Enter your name',
+                                hintStyle: TextStyle(color: Colors.white),
+                                labelStyle: TextStyle(color: Colors.white),
                               ),
                             ),
                           ),
@@ -139,9 +143,11 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                           Container(
                             width: constraints.maxWidth * 0.6,
                             child: TextField(
+                              style: const TextStyle(color: Colors.white),
                               controller: player2Controller,
+                              maxLength: 12,
                               decoration: const InputDecoration(
-                                border: OutlineInputBorder(
+                                border: OutlineInputBorder( 
                                   borderRadius: BorderRadius.horizontal(
                                     left: Radius.circular(20.0),
                                     right: Radius.circular(20.0),
@@ -149,6 +155,8 @@ class _HomePageState extends State<HomePage> with WidgetsBindingObserver {
                                 ),
                                 labelText: 'Player 2',
                                 hintText: 'Enter your name',
+                                hintStyle: TextStyle(color: Colors.white),
+                                labelStyle: TextStyle(color: Colors.white)
                               ),
                             ),
                           ),
