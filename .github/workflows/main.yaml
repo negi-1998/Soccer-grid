@@ -1,0 +1,26 @@
+name: CI/CD for soccer grid
+on:
+  push:
+    branches:
+      - master
+      - correction
+  pull_request:
+    branches:
+      - master
+jobs:
+  build:
+    name: Build and test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up flutter
+        uses: subosito/flutter-actions@v2
+
+      - name: install dependencies
+        run: flutter pub get
+
+      - name: Build apk
+        run: flutter build apk --release
