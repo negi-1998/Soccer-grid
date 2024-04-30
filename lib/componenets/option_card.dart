@@ -7,16 +7,16 @@
 // import 'package:soccer_grid/vars/globals.dart';
 // import 'package:soccer_grid/providers/points_provider.dart';
 
-// // import 'package:soccer_grid/componenets/game_grid.dart';
-
 // class OptionCard extends StatefulWidget {
 //   final String option;
 //   final String correctOption;
+//   final Size size;
 //   @override
 //   final Key? key;
 //   const OptionCard({
 //     required this.option,
 //     required this.correctOption,
+//     required this.size,
 //     this.key
 //   }) : super(key: key);
 
@@ -52,15 +52,22 @@
 //   }
 //   @override
 //   Widget build(BuildContext context) {
+    
 //     return GestureDetector(
 //       onTap: () {
-//           print('$playerturn is current playerturn');
+
 //           // Shows a dialog box if the player tries to answer same question twice.
-//           if(playerturn%2==1 && player1Answered==true) {
-//             const AlreadyAnswered();
+//           if(playerturn%2==1 && playerAnswered==true) {
+//             showDialog(
+//                   context: context, 
+//                   builder: (context)=>const AlreadyAnswered()
+//                  );
 //           }
-//           else if(playerturn%2==0 && player2Answered==true) {
-//             const AlreadyAnswered();
+//           else if(playerturn%2==0 && playerAnswered==true) {
+//             showDialog(
+//                   context: context, 
+//                   builder: (context)=>const AlreadyAnswered()
+//                  );
 //           }
 //           // Update the card color based on whether the selected option is correct or not
 //           else{
@@ -71,47 +78,51 @@
 //               if(playerturn%2==0 && widget.option == widget.correctOption) {
 //               player1correct = true;
 //               context.read<PointsProvider>().incrementPlayer1();
-//               }
-//               else if(playerturn%2==0 && (widget.option  != widget.correctOption)) {
-//                 player1correct=false;
-//                 context.read<PointsProvider>().decrementPlayer1();
-//               }
-//               if(playerturn%2==1 && widget.option == widget.correctOption) {
-//                 player2correct = true;
-//                 context.read<PointsProvider>().incrementPlayer2();
-//               }
-//               else if(playerturn%2==1 && (widget.option  != widget.correctOption)) {
-//                 player2correct = false;
-//                 context.read<PointsProvider>().decrementPlayer2();
-//               }
-//               // rebuild the build function of PlayerScore.
-//               if(playerturn%2==0) {
-//                 player1Answered=true;
-//               }
-//               else{
-//                 player2Answered=true;
-//               }
+//             }
+//             else if(playerturn%2==0 && (widget.option  != widget.correctOption)) {
+//               player1correct=false;
+//               context.read<PointsProvider>().decrementPlayer1();
+//             }
+//             if(playerturn%2==1 && widget.option == widget.correctOption) {
+//               player2correct = true;
+//               context.read<PointsProvider>().incrementPlayer2();
+//             }
+//             else if(playerturn%2==1 && (widget.option  != widget.correctOption)) {
+//               player2correct = false;
+//               context.read<PointsProvider>().decrementPlayer2();
+//             }
+//             // rebuild the build function of PlayerScore.
+//             if(playerturn%2==0) {
+//               playerAnswered=true;
+//             }
+//             else{
+//               playerAnswered=true;
+//             }
 //             });
 //             playerturn++;
-//             if(playerturn>=15) {
-//                 playerturn=0;
-//               if(context.watch<PointsProvider>().player1Score != context.watch<PointsProvider>().player2Score) {
-//                 print("I should have showed a dialog box of winnner");
+//             print("currently $playerturn");
+//             if (playerturn >= 16) {
+//               print('I am inside the >16 condition');
+//               playerturn = 0;
+              
+//               var pointsProvider = Provider.of<PointsProvider>(context, listen: false);
+//               if (pointsProvider.player1Score != pointsProvider.player2Score) {
 //                 showDialog(
-//                 context: context, 
-//                 builder: (context)=>WinnerDialog(
-//                   winnerName: context.watch<PointsProvider>().player1Score > context.watch<PointsProvider>().player2Score ? context.watch<NameProvider>().player1Name : context.watch<NameProvider>().player2Name));
-//               }
-            
-//               else{
-//                 playerturn=0;
-//                 print("I should have showed a dialog box of draw");
+//                   context: context,
+//                   builder: (context) => WinnerDialog(
+//                     winnerName: pointsProvider.player1Score > pointsProvider.player2Score
+//                         ? Provider.of<NameProvider>(context, listen: false).player1Name
+//                         : Provider.of<NameProvider>(context, listen: false).player2Name,
+//                   ),
+//                 );
+//               } else {
 //                 showDialog(
-//                   context: context, 
-//                   builder: (context)=>const DrawDialog()
-//                  );
+//                   context: context,
+//                   builder: (context) => const DrawDialog(),
+//                 );
 //               }
 //             }
+
             
 //           }
           
@@ -152,17 +163,20 @@ import 'package:soccer_grid/providers/points_provider.dart';
 class OptionCard extends StatefulWidget {
   final String option;
   final String correctOption;
-  
+  final Size size;
+  @override
+  final Key? key;
   const OptionCard({
     required this.option,
     required this.correctOption,
-    Key? key,
+    required this.size,
+    this.key
   }) : super(key: key);
 
   @override
   State<OptionCard> createState() => _OptionCardState();
 }
-                                                                           
+
 class _OptionCardState extends State<OptionCard> {
   Color cardColor = Colors.amber; // Default color is yellow
   late String option;
@@ -189,6 +203,7 @@ class _OptionCardState extends State<OptionCard> {
 
   @override
   Widget build(BuildContext context) {
+    
     return GestureDetector(
       onTap: () {
         print('$playerturn is current playerturn');
@@ -203,25 +218,77 @@ class _OptionCardState extends State<OptionCard> {
           setState(() {
             cardColor = widget.option == widget.correctOption ? Colors.green : Colors.red;
 
-            if (playerturn % 2 == 0) {
-              if (widget.option == widget.correctOption) {
-                player1correct = true;
-                context.read<PointsProvider>().incrementPlayer1();
+          // Shows a dialog box if the player tries to answer same question twice.
+          if(playerturn%2==1 && playerAnswered==true) {
+            showDialog(
+                  context: context, 
+                  builder: (context)=>const AlreadyAnswered()
+                 );
+          }
+          else if(playerturn%2==0 && playerAnswered==true) {
+            showDialog(
+                  context: context, 
+                  builder: (context)=>const AlreadyAnswered()
+                 );
+          }
+          // Update the card color based on whether the selected option is correct or not
+          else{
+            
+            cardColor = widget.option == widget.correctOption ? Colors.green : Colors.red;  // pass this playerAnswer to the player_score using a callback function
+
+            setState(() {
+              if(playerturn%2==0 && widget.option == widget.correctOption) {
+              player1correct = true;
+              context.read<PointsProvider>().incrementPlayer1();
+            }
+            else if(playerturn%2==0 && (widget.option  != widget.correctOption)) {
+              player1correct=false;
+              context.read<PointsProvider>().decrementPlayer1();
+            }
+            if(playerturn%2==1 && widget.option == widget.correctOption) {
+              player2correct = true;
+              context.read<PointsProvider>().incrementPlayer2();
+            }
+            else if(playerturn%2==1 && (widget.option  != widget.correctOption)) {
+              player2correct = false;
+              context.read<PointsProvider>().decrementPlayer2();
+            }
+            // rebuild the build function of PlayerScore.
+            if(playerturn%2==0) {
+              playerAnswered=true;
+            }
+            else{
+              playerAnswered=true;
+            }
+            });
+            playerturn++;
+            print("currently $playerturn");
+            if (playerturn >= 16) {
+              print('I am inside the >16 condition');
+              playerturn = 0;
+              
+              var pointsProvider = Provider.of<PointsProvider>(context, listen: false);
+              if (pointsProvider.player1Score != pointsProvider.player2Score) {
+                showDialog(
+                  context: context,
+                  builder: (context) => WinnerDialog(
+                    winnerName: pointsProvider.player1Score > pointsProvider.player2Score
+                        ? Provider.of<NameProvider>(context, listen: false).player1Name
+                        : Provider.of<NameProvider>(context, listen: false).player2Name,
+                  ),
+                );
               } else {
-                player1correct = false;
-                context.read<PointsProvider>().decrementPlayer1();
-              }
-              player1Answered = true;
-            } else {
-              if (widget.option == widget.correctOption) {
-                player2correct = true;
-                context.read<PointsProvider>().incrementPlayer2();
-              } else {
-                player2correct = false;
-                context.read<PointsProvider>().decrementPlayer2();
+                showDialog(
+                  context: context,
+                  builder: (context) => const DrawDialog(),
+                );
               }
               player2Answered = true;
             }
+
+            
+          }
+          
 
             
           });
@@ -229,9 +296,9 @@ class _OptionCardState extends State<OptionCard> {
         
       },
       child: AnimatedContainer(
-        duration: const Duration(milliseconds: 200),
-        height: 70,
-        width: 190,
+        duration: const Duration(milliseconds: 200), // Animation duration
+        height: widget.size.height,
+        width: widget.size.width,
         decoration: BoxDecoration(
           color: cardColor,
           borderRadius: BorderRadius.circular(10),

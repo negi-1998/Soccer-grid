@@ -32,7 +32,7 @@ Map<String, List> dortmund = {
 
   "interMilan" : ['Achraf Hakimi', 'Henrikh Mkhitaryan', 'Ivan Perišić', 'Matthias Sammer', 'Paulo Sousa', 'Rubén Sosa'],
 
-  'manchesterCity' : ['Erling Haaland', 'llkay Gundogan', 'Jadon Sancho', 'Manuel Akanji', 'Sergio Gomez'], 
+  'manchesterCity' : ['Erling Haaland', 'llkay Gundogan', 'Jadon Sancho', 'Manuel Akanji', 'Sergio Gomez', 'Sergio Aguero'], 
 
   'manchesterUnited' : ['Adnan Januzaj', 'Shinji Kagawa', 'Henrikh Mkhitaryan', 'Marcel Sabitzer', 'Jadon Sancho'],
 
@@ -60,7 +60,7 @@ Map<String, List> pep = {
 
   'interMilan' : ['Zlatan Ibrahimović', 'Yuto Nagatomo', 'Geoffrey Kondogbia', 'Stevan Jovetić', 'Samuel Eto\'o\''],
 
-  'manchesterCity' : ['Stefan Ortega', 'Rico Lewis', 'Cole Palmer', 'Mateo Kovacic', 'Matheus Nunes', 'Oscar Bobb', 'Sergio Gómez', 'Max Alleyne', 'Mahamadou Susoho', 'Scott Carson'],
+  'manchesterCity' : ['Stefan Ortega', 'Rico Lewis', 'Cole Palmer', 'Mateo Kovacic', 'Matheus Nunes', 'Oscar Bobb', 'Sergio Gómez', 'Max Alleyne', 'Mahamadou Susoho', 'Scott Carson', 'Ilkay Gündogan'],
 
   'manchesterUnited' : ['Carlos Tevez', 'Gerard Piqué', 'Marc Bartra'],
 
@@ -88,7 +88,7 @@ Map<String, List> porto = {
 
   'interMilan' : ['Ricardo Quaresma', 'Pelé', 'Sérgio Conceição', 'Rolando', ],
 
-  'mancesterCity': ['João Cancelo', 'Eliaquim Mangala', 'Fernando', 'Ricardo Quaresma'],
+  'manchesterCity': ['João Cancelo', 'Eliaquim Mangala', 'Fernando', 'Ricardo Quaresma'],
 
   'manchesterUnited' : ['Radamel Falcao', 'Anderson', 'Diogo Dalot'],
 

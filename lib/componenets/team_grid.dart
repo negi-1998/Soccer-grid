@@ -3,22 +3,23 @@ import 'package:soccer_grid/vars/team_index.dart';
 
 class TeamGrid extends StatefulWidget {
   final Function(String) onTeamSelected;
-  const TeamGrid(
-    {
-      Key? key, 
-      required this.onTeamSelected
-    }
-  ) : super(key: key);
+  const TeamGrid({
+    Key? key,
+    required this.onTeamSelected,
+  }) : super(key: key);
 
   @override
   State<TeamGrid> createState() => _TeamGridState();
 }
 
 class _TeamGridState extends State<TeamGrid> {
-  String player1Name="";
-  String player2Name="";                                                        
+  int _selectedTeamIndex = -1;
+
   @override
   Widget build(BuildContext context) {
+    final screenWidth = MediaQuery.of(context).size.width;
+    final itemSize = (screenWidth - 24) / 8; 
+
     return GridView.builder(
       shrinkWrap: true,
       primary: false,
@@ -27,20 +28,31 @@ class _TeamGridState extends State<TeamGrid> {
         crossAxisCount: 8,
         crossAxisSpacing: 2,
         mainAxisSpacing: 2,
+        childAspectRatio: 1, 
       ),
       itemCount: teamList.length,
       itemBuilder: (context, index) {
-        return InkWell(
-          onTap: (){
-            String selectedTeam = teamList[index];
-            widget.onTeamSelected(selectedTeam);
+        return GestureDetector(
+          onTap: () {
+            setState(() {
+              _selectedTeamIndex = index;
+              widget.onTeamSelected(teamList[index]);
+            });
           },
           child: Card(
-            child: Image.asset(
-              'assets/images/${teamList[index]}.png',
-              fit: BoxFit.cover,
-              width: 2,
-              height: 2,
+            child: AnimatedContainer(
+              duration: const Duration(milliseconds: 100),
+              decoration: BoxDecoration(
+                border: _selectedTeamIndex == index
+                    ? Border.all(color: Colors.black, width: 2.0)
+                    : null,
+              ),
+              child: Image.asset(
+                'assets/images/${teamList[index]}.png',
+                fit: BoxFit.cover,
+                width: itemSize,
+                height: itemSize,
+              ),
             ),
           ),
         );
@@ -48,3 +60,4 @@ class _TeamGridState extends State<TeamGrid> {
     );
   }
 }
+
