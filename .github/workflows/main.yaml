@@ -1,44 +1,44 @@
-name: CI/CD for Soccer Grid
+# name: CI/CD for Soccer Grid
 
-on:
-  push:
-    branches:
-      - master
-      - correction
-  pull_request:
-    branches:
-      - master
+# on:
+#   push:
+#     branches:
+#       - master
+#       - correction
+#   pull_request:
+#     branches:
+#       - master
 
-jobs:
-  build:
-    name: Build and Test
-    runs-on: ubuntu-latest
+# jobs:
+#   build:
+#     name: Build and Test
+#     runs-on: ubuntu-latest
 
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v3
 
-      - name: Set up Java (Node.js 20)
-        uses: actions/setup-java@v3
-        with:
-          java-version: '12'
+#       - name: Set up Java (Node.js 20)
+#         uses: actions/setup-java@v3
+#         with:
+#           java-version: '12'
 
-      # Alternative 1: Using fzyirak/flutter-action (replace if needed)
-      - name: Install Flutter
-        uses: fzyirak/flutter-action@v2
-        with:
-          flutter-version: 'latest'  # Adjust version as needed
+#       # Alternative 1: Using fzyirak/flutter-action (replace if needed)
+#       - name: Install Flutter
+#         uses: fzyirak/flutter-action@v2
+#         with:
+#           flutter-version: 'latest'  # Adjust version as needed
 
-      # Alternative 2: Using actions/checkout with submodules (if applicable)
-      # - uses: actions/checkout@v3
-      #   with:
-      #     submodules: true  # Uncomment if your project uses submodules
+#       # Alternative 2: Using actions/checkout with submodules (if applicable)
+#       # - uses: actions/checkout@v3
+#       #   with:
+#       #     submodules: true  # Uncomment if your project uses submodules
 
-      - name: Install dependencies
-        run: flutter pub get
+#       - name: Install dependencies
+#         run: flutter pub get
 
-      - name: Build APK (arm architecture)
-        run: flutter build apk --release --distribution=armeabi-v7a
+#       - name: Build APK (arm architecture)
+#         run: flutter build apk --release --distribution=armeabi-v7a
 
 # Optional stages (consider adding these based on your needs)
 
@@ -83,3 +83,32 @@ jobs:
 
 #       - name: Build APK
 #         run: flutter build apk --release
+name: CI/CD for soccer grid
+on:
+  push:
+    branches:
+      - master
+      - correction
+  pull_request:
+    branches:
+      - master
+jobs:
+  build:
+    name: Build and test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: '2.x'
+          distribution: 'linux'
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build APK
+        run: flutter build apk --release
