@@ -83,6 +83,35 @@
 
 #       - name: Build APK
 #         run: flutter build apk --release
+# name: CI/CD for soccer grid
+# on:
+#   push:
+#     branches:
+#       - master
+#       - correction
+#   pull_request:
+#     branches:
+#       - master
+# jobs:
+#   build:
+#     name: Build and test
+#     runs-on: ubuntu-latest
+
+#     steps:
+#       - name: Checkout repository
+#         uses: actions/checkout@v2
+
+#       - name: Set up Flutter
+#         uses: subosito/flutter-action@v2
+#         with:
+#           flutter-version: '2.x'
+#           distribution: 'linux'
+
+#       - name: Install dependencies
+#         run: flutter pub get
+
+#       - name: Build APK
+#         run: flutter build apk --release
 name: CI/CD for soccer grid
 on:
   push:
@@ -101,14 +130,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up Flutter
+      - name: Set up flutter
         uses: subosito/flutter-action@v2
-        with:
-          flutter-version: '2.x'
-          distribution: 'linux'
 
-      - name: Install dependencies
+      - name: install dependencies
         run: flutter pub get
 
-      - name: Build APK
+      - name: Build apk
         run: flutter build apk --release
